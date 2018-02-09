@@ -20,9 +20,12 @@
           <span data-test-subj="discoverQueryHits"
                 class="kuiLocalBreadcrumb__emphasis">{{(hits || 0) | number:0}}</span>
           <ng-pluralize count="hits" when="{'1':'hit', 'other':'hits'}"></ng-pluralize>
+          <!--Dashbsae plugin Begin-->
           <div style="margin-left: 8px; display:inline" ng-if="mergedEsResp.took">
-            <span style="color: green;font-weight: bolder">{{mergedEsResp.took}}</span><span style="font-size: 12px;font-weight: bold">ms</span> spent
+            server latency: <span style="font-weight: bolder">{{mergedEsResp.took}}</span><span
+            style="font-size: 12px;font-weight: bold">ms</span>
           </div>
+          <!--Dashbsae plugin End-->
         </h1>
       </div>
 
