@@ -1,4 +1,4 @@
-<discover-app class="app-container">
+<discover-app-override class="app-container">
   <!-- Local nav. -->
   <kbn-top-nav name="discover" config="topNavMenu">
     <!-- Transcluded elements. -->
@@ -24,6 +24,12 @@
           <div style="margin-left: 8px; display:inline" ng-if="mergedEsResp.took">
             server latency: <span style="font-weight: bolder">{{mergedEsResp.took}}</span><span
             style="font-size: 12px;font-weight: bold">ms</span>
+          </div>
+
+          <div style="margin-left: 8px; display:inline" ng-if="isSampling!=undefined">
+            sampling:
+            <span ng-if="isSampling" style="font-size: 12px;font-weight: bold; color: #00A69B">ON</span>
+            <span ng-if="!isSampling" style="font-size: 12px;font-weight: bold">OFF</span>
           </div>
           <!--Dashbsae plugin End-->
         </h1>
@@ -163,4 +169,4 @@
       </div>
     </div>
   </main>
-</discover-app>
+</discover-app-override>
