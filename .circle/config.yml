@@ -1,0 +1,43 @@
+version: 2
+jobs:
+    build:
+        machine:
+            enabled: true
+        working_directory: ~/dashbase-kibana-plugin
+        steps:
+            - checkout
+            - restore_cache:
+                keys:
+                    - node_modules-{{ checksum "package.json" }}
+                    - node_modules- # used if checksum fails
+            - run:
+                name: "Maven Clean Package"
+                command: |
+                    yarn install
+
+            - save_cache:
+                key: node_modules-{{ checksum "package.json" }}
+                paths:
+                  - ~/dashbase-kibana-plugin/node_modules
+
+            - run:
+                name: "Push Latest image to Docker Hub"
+                command: |
+                    if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                        docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+                        export RELEASE_IMAGE_VERSION=${CIRCLE_TAG:1}
+                        docker tag dashbase/es-query-proxy:dev dashbase/es-query-proxy:latest
+                        docker tag dashbase/es-query-proxy:dev dashbase/es-query-proxy:${RELEASE_IMAGE_VERSION}
+                        docker push dashbase/es-query-proxy:latest
+                        docker push dashbase/es-query-proxy:${RELEASE_IMAGE_VERSION}
+                    fi
+
+
+#workflows:
+#    version: 2
+#    build-n-deploy:
+#        jobs:
+#            - build:
+#                filters:
+#                    tags:
+#                        only: /^v.*/

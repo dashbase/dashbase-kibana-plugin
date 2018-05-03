@@ -497,7 +497,6 @@ function discoverController(
 
     segmented.on('first', function (res) {
       flushResponseData();
-      console.log(res)
       $scope.isSampling = res._sampling;
     });
 

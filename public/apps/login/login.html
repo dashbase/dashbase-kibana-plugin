@@ -1,0 +1,10 @@
+<div class="container login-wrapper" style="top:30%">
+  Please input dashbas Auth token (plz input->
+  <pre>yourDashbaseToken </pre>
+  <input type="text" class="form-control kuiTextInput" id="dashbase.auth.token" name="token" placeholder="token"
+         ng-class="{'has-error': ui.errorMessage}"
+         ng-model="ui.payload.token" required autofocus
+         autocomplete="off"/>
+  <button id="dashbase.auth.login" ng-click="ui.submit()" class="btn btn-default btn-login">Log in</button>
+  <p class="error-message" id="dashbase.auth.errormessage" ng-if="ui.errorMessage">{{ ui.errorMessage }}</p>
+</div>
