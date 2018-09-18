@@ -2,6 +2,12 @@
 
 > An awesome Kibana plugin
 
+
+```
+kubectl run kibana --env DASHBASE_AUTH_URL="http://{YOUR_AUTH_SERVER_URL}" --env ELASTICSEARCH_URL="http://{YOUR_ES_URL}" --image="dashbase/kibana:6.3.2"
+```
+
+
 ---
 
 ## development
